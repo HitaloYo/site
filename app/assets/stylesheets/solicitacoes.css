@@ -1,0 +1,223 @@
+body {
+  margin: 0;
+  font-family: "Poppins", sans-serif;
+  background-color: #fff;
+  color: rgb(34, 34, 34);
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+header {
+  background-color: rgb(34, 34, 34);
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px 50px;
+  border-bottom: 5px solid rgb(132, 14, 201);
+  position: relative;
+}
+
+header h1 {
+  font-size: 28px;
+  margin: 0;
+}
+
+.header-buttons {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 15px;
+}
+
+.header-button {
+  background-color: rgb(132, 14, 201);
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: 0.3s;
+  font-size: 15px;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-family: "Poppins", sans-serif;
+}
+
+.header-button:hover {
+  background-color: #9b30ff;
+  text-decoration: none;
+  color: #fff;
+}
+
+.logo {
+  height: 65px;
+}
+
+main {
+  padding: 40px;
+}
+
+.solicitacoes-section {
+  background-color: whitesmoke;
+  border: 2px solid rgb(132, 14, 201);
+  border-radius: 12px;
+  padding: 40px;
+  margin-bottom: 40px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+}
+
+.solicitacoes-section h2 {
+  color: rgb(132, 14, 201);
+  font-size: 26px;
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+.descricao {
+  text-align: center;
+  color: #555;
+  margin-bottom: 30px;
+}
+
+.solicitacao-form {
+  display: flex;
+  flex-direction: column;
+  max-width: 500px;
+  margin: 0 auto;
+  gap: 15px;
+}
+
+.solicitacao-form label {
+  font-weight: 600;
+  color: rgb(34, 34, 34);
+}
+
+.solicitacao-form select,
+.solicitacao-form textarea,
+.solicitacao-form .form-select,
+.solicitacao-form .form-textarea {
+  border: 2px solid rgb(132, 14, 201);
+  border-radius: 8px;
+  padding: 10px;
+  font-size: 15px;
+  outline: none;
+  transition: 0.3s;
+  font-family: "Poppins", sans-serif;
+}
+
+.solicitacao-form select:focus,
+.solicitacao-form textarea:focus,
+.solicitacao-form .form-select:focus,
+.solicitacao-form .form-textarea:focus {
+  border-color: #9b30ff;
+  box-shadow: 0 0 6px rgba(132, 14, 201, 0.3);
+}
+
+.btn-enviar {
+  background-color: rgb(132, 14, 201);
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 8px;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.3s;
+  font-family: "Poppins", sans-serif;
+}
+
+.btn-enviar:hover {
+  background-color: #9b30ff;
+}
+
+.downloads-section h2 {
+  color: rgb(132, 14, 201);
+  font-size: 26px;
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+.downloads-grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 25px;
+  margin-top: 25px;
+}
+
+.download-card {
+  background-color: #fff;
+  border: 2px solid rgb(132, 14, 201);
+  border-radius: 12px;
+  width: 260px;
+  text-align: center;
+  padding: 25px;
+  transition: 0.3s;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.download-card:hover {
+  background-color: whitesmoke;
+  transform: scale(1.05);
+  box-shadow: 0 6px 12px rgba(132, 14, 201, 0.3);
+}
+
+.download-card i {
+  font-size: 42px;
+  color: rgb(132, 14, 201);
+  margin-bottom: 10px;
+}
+
+.download-card h3 {
+  color: rgb(132, 14, 201);
+  margin-bottom: 5px;
+}
+
+.download-card p {
+  font-size: 14px;
+  margin-bottom: 10px;
+  color: rgb(34, 34, 34);
+}
+
+.download-button {
+  background-color: rgb(132, 14, 201);
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  padding: 8px 16px;
+  cursor: pointer;
+  transition: 0.3s;
+  text-decoration: none;
+  display: inline-block;
+  font-family: "Poppins", sans-serif;
+}
+
+.download-button:hover {
+  background-color: #9b30ff;
+  text-decoration: none;
+  color: #fff;
+}
+
+@media (max-width: 768px) {
+  header {
+    flex-direction: column;
+    gap: 10px;
+    text-align: center;
+  }
+
+  .header-buttons {
+    position: static;
+    transform: none;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  .solicitacao-form {
+    width: 100%;
+  }
+}

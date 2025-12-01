@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Financeiro - Portal Acadêmico</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
+  <%= stylesheet_link_tag "financeiro" %>
+</head>
+<body>
+  <header>
+    <h1>Instituto Qualquer</h1>
+    <div class="header-buttons">
+      <%= link_to root_path, class: "header-button" do %>
+        <i class="bi bi-house-door"></i> Página Principal
+      <% end %>
+      <%= link_to perfil_path, class: "header-button" do %>
+        <i class="bi bi-person-circle"></i> Perfil
+      <% end %>
+    <%= button_to logout_path, method: :delete, class: 'header-button logout-btn' do %>
+      <i class="bi bi-box-arrow-right"></i> Sair
+    <% end %>
+    </div>
+    <%= image_tag "logo.png", alt: "Logo do Instituto", class: "logo" %>
+  </header>
+
+  <main>
+    <%= yield %>
+  </main>
+</body>
+</html>

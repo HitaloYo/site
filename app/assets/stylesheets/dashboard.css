@@ -1,0 +1,488 @@
+body {
+  margin: 0;
+  font-family: "Poppins", sans-serif;
+  background-color: #fff;
+  color: rgb(34, 34, 34);
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+/* HEADER */
+header {
+  background-color: rgb(34, 34, 34);
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px 50px;
+  border-bottom: 5px solid rgb(132, 14, 201);
+}
+
+header h1 {
+  font-size: 28px;
+  margin: 0;
+  letter-spacing: 1px;
+}
+
+.header-buttons {
+  display: flex;
+  gap: 15px;
+}
+
+
+.header-buttons {
+  display: flex;
+  gap: 15px;
+}
+
+.header-button {
+  background-color: rgb(132, 14, 201);
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: 0.3s;
+  font-size: 15px;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-family: "Poppins", sans-serif;
+}
+
+.header-button:hover {
+  background-color: #9b30ff;
+  text-decoration: none;
+  color: #fff;
+}
+
+.logo {
+  height: 65px;
+}
+
+/* MAIN CONTENT */
+main {
+  padding: 40px;
+}
+
+.welcome {
+  background: linear-gradient(135deg, rgb(132, 14, 201), rgb(34, 34, 34));
+  color: #fff;
+  border-radius: 12px;
+  padding: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.welcome-text {
+  max-width: 60%;
+}
+
+.welcome-text h2 {
+  font-size: 28px;
+  margin-bottom: 10px;
+}
+
+.logo-welcome {
+  height: 100px;
+  filter: drop-shadow(2px 2px 6px rgba(0, 0, 0, 0.4));
+}
+
+.content {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 30px;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+/* CARDS - AGORA SÃO LINKS */
+.cards {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  flex: 1;
+  justify-content: center;
+}
+
+.card {
+  background-color: #fff;
+  border: 2px solid rgb(132, 14, 201);
+  border-radius: 12px;
+  padding: 25px;
+  width: 200px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  transition: transform 0.2s, box-shadow 0.2s;
+  text-align: center;
+  text-decoration: none;
+  color: inherit;
+  display: block;
+}
+
+.card:hover {
+  background-color: whitesmoke;
+  transform: scale(1.05);
+  box-shadow: 0 6px 12px rgba(132, 14, 201, 0.3);
+  text-decoration: none;
+  color: inherit;
+}
+
+.card i {
+  font-size: 40px;
+  color: rgb(132, 14, 201);
+  margin-bottom: 10px;
+}
+
+.card h3 {
+  color: rgb(132, 14, 201);
+  margin-bottom: 10px;
+}
+
+/* PERFIL E CALENDÁRIO */
+.profile-calendar {
+  background-color: whitesmoke;
+  border: 2px solid rgb(132, 14, 201);
+  border-radius: 12px;
+  padding: 25px;
+  width: 320px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: fit-content;
+}
+
+.profile {
+  text-align: center;
+  margin-bottom: 25px;
+}
+
+/* PLACEHOLDER DE PERFIL */
+.profile-placeholder {
+  width: 90px;
+  height: 90px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, rgb(132, 14, 201), rgb(160, 60, 220));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 15px auto;
+  border: 3px solid rgb(132, 14, 201);
+  box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+}
+
+.profile-placeholder i {
+  font-size: 40px;
+  color: white;
+}
+
+.profile-image {
+  width: 90px;           /* Largura fixa */
+  height: 90px;          /* Altura fixa */
+  border-radius: 50%;    /* Torna redondo */
+  margin-bottom: 10px;
+  border: 3px solid rgb(132, 14, 201);
+  object-fit: cover;     /* IMPORTANTE: corta a imagem para caber */
+  object-position: center; /* Centraliza a imagem */
+  box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+}
+
+.profile h3 {
+  color: rgb(132, 14, 201);
+}
+
+.calendar {
+  text-align: center;
+  border-top: 2px solid rgb(132, 14, 201);
+  padding-top: 15px;
+}
+
+/* RESPONSIVIDADE */
+@media (max-width: 768px) {
+  header {
+    flex-direction: column;
+    gap: 15px;
+    padding: 15px;
+  }
+  
+  .header-buttons {
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  
+  .welcome {
+    flex-direction: column;
+    text-align: center;
+    gap: 20px;
+  }
+  
+  .welcome-text {
+    max-width: 100%;
+  }
+  
+  .content {
+    flex-direction: column;
+  }
+  
+  .profile-calendar {
+    width: 100%;
+    margin-top: 20px;
+  }
+  
+  .cards {
+    justify-content: center;
+  }
+}
+
+.logout-form {
+  display: inline;
+  margin: 0;
+  padding: 0;
+}
+
+.logout-form .header-button {
+  margin: 0;
+  font-family: "Poppins", sans-serif;
+  font-size: 15px;
+  line-height: normal;
+}
+
+/* Estilos para página Em Desenvolvimento */
+.coming-soon-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  padding: 40px 20px;
+}
+
+.coming-soon-card {
+  background: white;
+  border: 3px solid rgb(132, 14, 201);
+  border-radius: 16px;
+  padding: 50px 40px;
+  text-align: center;
+  box-shadow: 0 8px 25px rgba(132, 14, 201, 0.15);
+  max-width: 600px;
+  width: 100%;
+}
+
+.construction-icon {
+  font-size: 80px;
+  color: rgb(132, 14, 201);
+  margin-bottom: 25px;
+}
+
+.coming-soon-card h2 {
+  color: rgb(132, 14, 201);
+  margin-bottom: 20px;
+  font-size: 28px;
+}
+
+.coming-soon-card p {
+  color: #666;
+  font-size: 18px;
+  margin-bottom: 30px;
+  line-height: 1.6;
+}
+
+.features-list {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  margin: 30px 0;
+  text-align: left;
+}
+
+.feature-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 15px;
+  background: #f8f9fa;
+  border-radius: 8px;
+  border-left: 4px solid rgb(132, 14, 201);
+}
+
+.feature-item i {
+  color: rgb(132, 14, 201);
+  font-size: 18px;
+  width: 24px;
+}
+
+.feature-item span {
+  color: #333;
+  font-weight: 500;
+}
+
+.estimated-time {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  background: linear-gradient(135deg, rgb(132, 14, 201), rgb(160, 60, 220));
+  color: white;
+  padding: 15px 20px;
+  border-radius: 10px;
+  margin: 25px 0;
+  font-weight: 600;
+}
+
+.estimated-time i {
+  font-size: 20px;
+}
+
+.back-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background-color: rgb(132, 14, 201);
+  color: white;
+  padding: 12px 25px;
+  border-radius: 8px;
+  text-decoration: none;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  margin-top: 15px;
+}
+
+.back-button:hover {
+  background-color: #9b30ff;
+  transform: translateY(-2px);
+  text-decoration: none;
+  color: white;
+}
+
+/* Estilos para a página Em Desenvolvimento */
+.coming-soon-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  padding: 40px 20px;
+}
+
+.coming-soon-card {
+  background: white;
+  border: 3px solid rgb(132, 14, 201);
+  border-radius: 16px;
+  padding: 50px 40px;
+  text-align: center;
+  box-shadow: 0 8px 25px rgba(132, 14, 201, 0.15);
+  max-width: 600px;
+  width: 100%;
+}
+
+.construction-icon {
+  font-size: 80px;
+  color: rgb(132, 14, 201);
+  margin-bottom: 30px;
+}
+
+.construction-icon i {
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.1); }
+  100% { transform: scale(1); }
+}
+
+.coming-soon-card h3 {
+  color: rgb(132, 14, 201);
+  font-size: 28px;
+  margin-bottom: 20px;
+  font-weight: 600;
+}
+
+.coming-soon-card p {
+  color: #555;
+  font-size: 16px;
+  line-height: 1.6;
+  margin-bottom: 15px;
+}
+
+.alternative-links {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin: 30px 0;
+}
+
+.alt-link {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 12px 20px;
+  background-color: #f8f9fa;
+  border: 2px solid #e9ecef;
+  border-radius: 8px;
+  color: rgb(132, 14, 201);
+  text-decoration: none;
+  font-weight: 500;
+  transition: all 0.3s ease;
+}
+
+.alt-link:hover {
+  background-color: rgb(132, 14, 201);
+  color: white;
+  text-decoration: none;
+  transform: translateY(-2px);
+}
+
+.progress-container {
+  margin-top: 30px;
+}
+
+.progress-bar {
+  width: 100%;
+  height: 8px;
+  background-color: #e9ecef;
+  border-radius: 4px;
+  overflow: hidden;
+  margin-bottom: 10px;
+}
+
+.progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, rgb(132, 14, 201), #9b30ff);
+  border-radius: 4px;
+  animation: progress-animation 3s ease-in-out infinite;
+}
+
+@keyframes progress-animation {
+  0% { width: 30%; }
+  50% { width: 70%; }
+  100% { width: 30%; }
+}
+
+.progress-text {
+  color: #666;
+  font-size: 14px;
+  font-style: italic;
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+  .coming-soon-card {
+    padding: 30px 20px;
+    margin: 20px;
+  }
+  
+  .construction-icon {
+    font-size: 60px;
+  }
+  
+  .coming-soon-card h3 {
+    font-size: 24px;
+  }
+  
+  .alternative-links {
+    gap: 10px;
+  }
+}

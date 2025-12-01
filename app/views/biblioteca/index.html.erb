@@ -1,0 +1,69 @@
+<!-- app/views/pages/biblioteca.html.erb -->
+<header>
+  <h1>Instituto Qualquer</h1>
+  <div class="header-buttons">
+    <%= link_to root_path, class: 'header-button' do %>
+      <i class="bi bi-house-door"></i> Página Principal
+    <% end %>
+
+    <%= link_to disciplinas_path, class: 'header-button' do %>
+      <i class="bi bi-file-earmark-text"></i> Disciplinas
+    <% end %>
+
+    <%= link_to perfil_path, class: 'header-button' do %>
+      <i class="bi bi-person-circle"></i> Perfil
+    <% end %>
+    
+    <%= button_to logout_path, method: :delete, class: 'header-button logout-btn' do %>
+      <i class="bi bi-box-arrow-right"></i> Sair
+    <% end %>
+  </div>
+  <%= image_tag 'logo.png', alt: 'Logo do Instituto', class: 'logo' %>
+</header>
+
+<main>
+  <section class="welcome">
+    <div class="welcome-text">
+      <h2><i class="bi bi-book"></i> Biblioteca Virtual</h2>
+      <p>Em breve: Consulte nosso acervo digital e gerencie sua carteirinha.</p>
+    </div>
+    <%= image_tag 'logo.png', alt: 'Logo Instituto', class: 'logo-welcome' %>
+  </section>
+
+  <section class="content">
+    <div class="coming-soon-container">
+      <div class="coming-soon-card">
+        <div class="construction-icon">
+          <i class="bi bi-tools"></i>
+        </div>
+        <h2>Página em Desenvolvimento</h2>
+        <p>Estamos trabalhando para trazer a melhor experiência em nossa biblioteca virtual.</p>
+        <div class="features-list">
+          <div class="feature-item">
+            <i class="bi bi-search"></i>
+            <span>Consulta ao acervo digital</span>
+          </div>
+          <div class="feature-item">
+            <i class="bi bi-card-text"></i>
+            <span>Geração de carteirinha virtual</span>
+          </div>
+          <div class="feature-item">
+            <i class="bi bi-clock"></i>
+            <span>Renovação online de empréstimos</span>
+          </div>
+          <div class="feature-item">
+            <i class="bi bi-bookmark-check"></i>
+            <span>Reserva de materiais</span>
+          </div>
+        </div>
+        <div class="estimated-time">
+          <i class="bi bi-hourglass-split"></i>
+          <span>Previsão de lançamento: Dezembro 202X</span>
+        </div>
+        <%= link_to root_path, class: 'back-button' do %>
+          <i class="bi bi-arrow-left"></i> Voltar ao Início
+        <% end %>
+      </div>
+    </div>
+  </section>
+</main>

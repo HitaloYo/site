@@ -1,0 +1,248 @@
+
+/* GARANTE QUE HTML E BODY OCUPEM 100% DA ALTURA DO VIEWPORT */
+html, body {
+    margin: 0;
+    padding: 0;
+    height: 100%; 
+}
+
+/* OTIMIZAÇÃO: Define como as dimensões são calculadas */
+* {
+    box-sizing: border-box; 
+}
+
+body {
+    background-color: #fff;
+    color: rgb(34, 34, 34); 
+    /* MANTIDO: O limite para centralizar o MAIN */
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0; /* Remove todo o padding do body */
+    font-family: 'Poppins', sans-serif;
+
+    display: flex;
+    flex-direction: column;
+    /* MIN-HEIGHT: 100vh GARANTE QUE O BODY PREENCHA A ALTURA TOTAL DA TELA */
+    min-height: 100vh; 
+    overflow-x: hidden; /* Previne barra de rolagem horizontal devido ao header full-width */
+}
+
+header {
+    /* CÓDIGO PARA OCUPAR 100% DA LARGURA DA TELA (FULL-WIDTH) */
+    width: 100vw; 
+    position: relative;
+    left: 50%;
+    right: 50%;
+    margin-left: -50vw; 
+    margin-right: -50vw; 
+    
+    /* BORDA INFERIOR ROXA GARANTIDA */
+    border-bottom: 5px solid rgb(132, 14, 201);
+    background-color: rgb(34, 34, 34); 
+    color: white;
+    
+    /* REAPLICANDO O ALINHAMENTO INTERNO */
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 40px; 
+    box-sizing: border-box;
+}
+
+#titulo {
+    flex-direction: column;
+    line-height: 10px;
+}
+#t_2{
+    color: rgb(132, 14, 201); 
+}
+
+nav ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+nav li {
+    display: inline-block;
+    margin: 20px;
+}
+
+nav a {
+    color: white;
+    text-decoration: none;
+}
+
+nav a:hover {
+    color: rgb(132, 14, 201);
+    transition: .3s all;
+}
+
+#ajuda {
+    border: 2px solid rgb(132, 14, 201);
+    padding: 10px 15px;
+    border-radius: 6px;
+    color: rgb(132, 14, 201); 
+    background-color: transparent;
+}
+
+#ajuda:hover {
+    background-color: rgb(132, 14, 201);
+    color: white;
+}
+
+h1 {
+    font-weight: 700;
+}
+
+
+main {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;    
+    align-items: center;        
+    /* GARANTIDO: Ocupa todo o espaço vertical restante */
+    flex: 1;                    
+    gap: 60px; 
+    
+    /* Padding para afastar do header/rodapé */
+    padding: 50px 15px; 
+}
+
+
+form {
+    display: flex;
+    flex-direction: column;
+    /* LARGURA FIXA AUMENTADA PARA 800PX */
+    width: 800px; 
+    padding: 40px;
+    border: 2px solid rgb(132, 14, 201); 
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(132, 14, 201, 0.2);
+    background-color: whitesmoke;
+}
+
+form h2 {
+    color: rgb(132, 14, 201);
+    text-align: center;
+    margin-bottom: 30px;
+    font-size: 24px;
+}
+
+
+article {
+    /* Ajustado para acomodar o formulário mais largo */
+    width: 30%; 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+
+label {
+    margin-top: 20px;
+    margin-bottom: 5px;
+    font-size: 16px;
+    font-weight: 500;
+    color: rgb(34, 34, 34);
+}
+
+
+input {
+    margin-bottom: 20px;
+    /* Padding alto + 100% da largura do form (800px) garante largura máxima */
+    padding: 20px; 
+    border-radius: 8px; 
+    border: 2px solid rgb(132, 14, 201); 
+    font-size: 18px;
+    width: 100%;         
+    box-sizing: border-box;
+}
+
+
+form [type="submit"] {
+    background-color: rgb(132, 14, 201);
+    color: white;
+    font-weight: bold;
+    padding: 18px 40px;  
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    align-self: center; 
+    border: none;
+    width: 100%; 
+    margin-top: 20px;
+}
+
+form [type="submit"]:hover {
+    background-color: #9b30ff; 
+}
+
+
+img {
+    width: 100%;     
+    /* Tamanho máximo da imagem para focar no formulário */
+    max-width: 250px; 
+    height: auto;    
+}
+
+
+@media (max-width: 768px) {
+    main {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
+
+    form {
+        /* Em mobile, a largura volta a ser responsiva para caber na tela */
+        width: 90%; 
+        padding: 20px;
+    }
+    
+    header {
+        /* Revertendo o truque de full-width no mobile para evitar problemas */
+        width: auto;
+        margin: 0;
+        position: static;
+        left: auto;
+        right: auto;
+        
+        flex-direction: column;
+        text-align: center;
+        padding: 15px;
+        border-bottom: 3px solid rgb(132, 14, 201); 
+    }
+    nav {
+        margin-top: 15px;
+    }
+
+    img {
+        max-width: 70%;
+        margin-top: 20px;
+    }
+}
+
+/* Estilos para mensagens flash */
+.alert {
+    color: #d32f2f;
+    background-color: #ffcdd2;
+    padding: 12px;
+    border-radius: 6px;
+    border: 1px solid #f44336;
+    margin-top: 15px;
+    text-align: center;
+    font-weight: 500;
+}
+
+.notice {
+    color: #388e3c;
+    background-color: #c8e6c9;
+    padding: 12px;
+    border-radius: 6px;
+    border: 1px solid #4caf50;
+    margin-top: 15px;
+    text-align: center;
+    font-weight: 500;
+}

@@ -1,0 +1,68 @@
+<!-- app/views/sessions/new.html.erb -->
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <%= stylesheet_link_tag 'sessions' %>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
+    <title>Acesso ao Portal</title>
+</head>
+<body>
+    <header>
+        <div id="titulo">
+            <h1>Instituição</h1>
+            <h1 id="t_2">Qualquer</h1>
+        </div>
+
+        <nav>
+            <ul>
+                <li><%= link_to 'Sobre', sobre_path %></li>
+                <li><%= link_to 'Contato', contato_path %></li>
+                <li><%= link_to 'Precisa de ajuda com o login?', ajuda_login_path, id: 'ajuda' %></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <aside>
+            <%= form_with url: login_path, local: true do |form| %>
+                <h2>Acesse o Portal Acadêmico</h2>
+                
+                <label for="matricula">E-mail ou Matrícula</label>
+                <%= form.text_field :matricula, 
+                                  id: "matricula",
+                                  placeholder: "Digite seu E-mail ou Matrícula", 
+                                  required: true %>
+
+                <label for="password">Senha</label>
+                <%= form.password_field :password, 
+                                      id: "password",
+                                      placeholder: "Digite sua senha", 
+                                      required: true %>
+
+                <%= form.submit "Entrar" %>
+            <% end %>
+            
+            <% if flash[:alert] %>
+                <div class="alert" style="color: red; margin-top: 15px; text-align: center;">
+                    <%= flash[:alert] %>
+                </div>
+            <% end %>
+            
+            <% if flash[:notice] %>
+                <div class="notice" style="color: green; margin-top: 15px; text-align: center;">
+                    <%= flash[:notice] %>
+                </div>
+            <% end %>
+        </aside>
+        
+        <article>
+            <%= image_tag 'logo.png', 
+                         alt: 'Ilustração de meditação, representando foco e bem-estar' %>
+        </article>
+    </main>
+</body>
+</html>

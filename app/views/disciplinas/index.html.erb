@@ -1,0 +1,27 @@
+<section class="disciplinas-section">
+  <h2><i class="bi bi-journal-bookmark"></i> Minhas Disciplinas</h2>
+  <p class="descricao">
+    Abaixo estão listadas suas disciplinas do período atual.
+  </p>
+
+  <% if @disciplinas.any? %>
+    <div class="disciplinas-grid">
+      <% @disciplinas.each do |turma| %>
+        <div class="disciplina-card">
+          <i class="bi bi-journal-text"></i>
+          <h3><%= turma.disciplina.nome %></h3>
+          <p><strong>Professor:</strong> <%= turma.disciplina.professor.nome %></p>
+          <p><strong>Código:</strong> <%= turma.disciplina.codigo %></p>
+          <p><strong>Carga Horária:</strong> <%= turma.disciplina.carga_horaria %>h</p>
+          <p><strong>Turma:</strong> <%= turma.codigo_turma %></p>
+          <p><strong>Semestre:</strong> <%= turma.semestre %>/<%= turma.ano %></p>
+          <%= link_to "Acessar", "#", class: "disciplina-button" %>
+        </div>
+      <% end %>
+    </div>
+  <% else %>
+    <div class="no-disciplinas">
+      <p>Nenhuma disciplina matriculada no período atual.</p>
+    </div>
+  <% end %>
+</section>

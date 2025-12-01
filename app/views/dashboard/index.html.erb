@@ -1,0 +1,94 @@
+<header>
+  <h1>Instituto Qualquer</h1>
+  <div class="header-buttons">
+    <%= link_to disciplinas_path, class: 'header-button' do %>
+      <i class="bi bi-file-earmark-text"></i> Disciplinas
+    <% end %>
+
+    <%= link_to perfil_path, class: 'header-button' do %>
+      <i class="bi bi-person-circle"></i> Perfil
+    <% end %>
+    
+    <%= button_to logout_path, method: :delete, class: 'header-button' do %>
+      <i class="bi bi-box-arrow-right"></i> Sair
+    <% end %>
+
+  </div>
+  <%= image_tag 'logo.png', alt: 'Logo do Instituto', class: 'logo' %>
+</header>
+
+<main>
+  <section class="welcome">
+    <div class="welcome-text">
+      <h2>Bem-vindo ao Portal Acadêmico, <%= @aluno.nome %>!</h2>
+      <p>
+        Acompanhe suas disciplinas, notas e serviços de forma simples e prática.
+      </p>
+    </div>
+    <%= image_tag 'logo.png', alt: 'Logo Instituto', class: 'logo-welcome' %>
+  </section>
+
+  <section class="content">
+    <div class="cards">
+      <%= link_to disciplinas_path, class: 'card' do %>
+        <i class="bi bi-journal-bookmark"></i>
+        <h3>Disciplinas</h3>
+        <p>Consulte suas matérias e professores.</p>
+      <% end %>
+
+      <%= link_to aluno_online_path, class: 'card' do %>
+        <i class="bi bi-person-badge"></i>
+        <h3>Aluno Online</h3>
+        <p>Consulte informações acadêmicas e notas.</p>
+      <% end %>
+
+      <%= link_to biblioteca_path, class: 'card' do %>
+        <i class="bi bi-book"></i>
+        <h3>Biblioteca</h3>
+        <p>Consulte acervo e gere carteirinha.</p>
+      <% end %>
+
+      <%= link_to financeiro_path, class: 'card' do %>
+        <i class="bi bi-cash-stack"></i>
+        <h3>Financeiro</h3>
+        <p>Veja mensalidades e boletos.</p>
+      <% end %>
+
+      <%= link_to solicitacoes_path, class: 'card' do %>
+        <i class="bi bi-envelope-paper"></i>
+        <h3>Solicitações</h3>
+        <p>Envie requerimentos e acompanhe o status.</p>
+      <% end %>
+
+      <%= link_to sobre_path, class: 'card' do %>
+        <i class="bi bi-house-door"></i>
+        <h3>Sobre nós</h3>
+        <p>Saiba mais sobre nossa instituição.</p>
+      <% end %>
+    </div>
+
+    <div class="profile-calendar">
+      <div class="profile">
+        <div class="profile-placeholder">
+          <i class="bi bi-person-fill"></i>
+        </div>
+        <h3><%= @aluno.nome %></h3>
+        <p><strong>Curso:</strong> <%= @aluno.curso %> </p>
+        <p><strong>Matrícula:</strong> <%= @aluno.matricula %></p>
+        <p><strong>Status:</strong> <%= @aluno.ativo ? 'Ativo' : 'Inativo' %></p>
+      </div>
+
+      <div class="calendar">
+        <h3><i class="bi bi-calendar-event"></i> Calendário Acadêmico</h3>
+        <iframe
+          src="https://calendar.google.com/calendar/embed?src=pt_br.brazilian%23holiday%40group.v.calendar.google.com&ctz=America%2FSao_Paulo"
+          style="border: 0"
+          width="300"
+          height="200"
+          frameborder="0"
+          scrolling="no"
+        ></iframe>
+      </div>
+    </div>
+  </section>
+</main>

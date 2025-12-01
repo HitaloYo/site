@@ -1,0 +1,218 @@
+<!-- app/views/perfil/edit.html.erb -->
+<section class="welcome">
+  <div class="welcome-text">
+    <h2>Perfil do Aluno</h2>
+    <p>Gerencie e atualize suas informações pessoais e acadêmicas.</p>
+  </div>
+  <%= image_tag "logo.png", alt: "Logo Instituto", class: "logo-welcome" %>
+</section>
+
+<section class="perfil-section">
+  <!-- Coluna esquerda -->
+  <div class="perfil-esquerda">
+    <div class="perfil-card">
+      <div class="foto-perfil"><%= @aluno.iniciais %></div>
+      <h3><%= @aluno.nome %></h3>
+      <p class="matricula">N° matrícula <%= @aluno.matricula %></p>
+      <span class="status status-<%= @aluno.ativo ? 'regular' : 'inativo' %>">
+        <%= @aluno.ativo ? 'ATIVO' : 'INATIVO' %>
+      </span>
+
+      <p><strong>Curso:</strong><br /><%= @aluno.curso || 'Não informado' %></p>
+      <p><strong>Unidade:</strong><br /><%= @aluno.unidade || 'Não informada' %></p>
+
+      <button class="btn-carteirinha">
+        <i class="bi bi-card-text"></i> Gerar carteirinha digital
+      </button>
+    </div>
+
+    <div class="seguranca-card">
+      <div class="seguranca-header">
+        <h3>Segurança</h3>
+      </div>
+
+      <div class="seguranca-body">
+        <%= form_with url: perfil_password_path, method: :patch do |form| %>
+          <label for="current_password">Senha atual</label>
+          <%= form.password_field :current_password, placeholder: "Digite sua senha atual", required: true %>
+          
+          <label for="new_password">Nova senha</label>
+          <%= form.password_field :new_password, placeholder: "Digite a nova senha", required: true %>
+
+          <label for="password_confirmation">Confirmação da senha</label>
+          <%= form.password_field :password_confirmation, placeholder: "Confirme a nova senha", required: true %>
+          
+          <%= form.submit "Atualizar Senha", class: "btn-editar" %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+
+  
+  <%= form_with model: @aluno, url: perfil_path, method: :patch, class: "perfil-direita" do |form| %>
+    <div class="perfil-grupo">
+      <h3>Dados pessoais</h3>
+      <div class="form-linha">
+        <%= form.text_field :cpf, placeholder: "CPF", value: @aluno.cpf, readonly: true %>
+        <%= form.text_field :nome, placeholder: "Nome completo", value: @aluno.nome, readonly: true %>
+      </div>
+      <div class="form-linha">
+        <%= form.text_field :cor_raca, placeholder: "Cor/Raça", value: @aluno.cor_raca %>
+        <%= form.text_field :estado_civil, placeholder: "Estado civil", value: @aluno.estado_civil %>
+        <%= form.text_field :sexo, placeholder: "Sexo", value: @aluno.sexo %>
+      </div>
+      <div class="form-linha">
+        <%= form.text_field :data_nascimento, placeholder: "Data de nascimento", 
+              value: @aluno.data_nascimento ? l(@aluno.data_nascimento, format: :long) : '', readonly: true %>
+        <%= form.text_field :estado_nascimento, placeholder: "Estado de nascimento", value: @aluno.estado_nascimento %>
+        <%= form.text_field :cidade_nascimento, placeholder: "Cidade de nascimento", value: @aluno.cidade_nascimento %>
+      </div>
+    </div>
+
+    <div class="perfil-grupo">
+      <h3>Identificação</h3>
+      <div class="form-linha">
+        <!-- Campo Tipo de Documento com Dropdown -->
+        <div class="dropdown-container">
+          <input type="hidden" name="aluno[tipo_documento]" id="aluno_tipo_documento" value="<%= @aluno.tipo_documento %>">
+          <button type="button" class="dropdown-button" onclick="toggleDropdown(event)">
+            <span class="dropdown-selected">
+              <%= @aluno.tipo_documento.present? ? @aluno.tipo_documento : "Selecione o tipo" %>
+            </span>
+            <span class="dropdown-arrow">▼</span>
+          </button>
+          <div class="dropdown-options" id="documentoOptions">
+            <div class="dropdown-option" data-value="RG">RG</div>
+            <div class="dropdown-option" data-value="CNH">CNH</div>
+            <div class="dropdown-option" data-value="Passaporte">Passaporte</div>
+            <div class="dropdown-option" data-value="RNE">RNE</div>
+            <div class="dropdown-option" data-value="CTPS">CTPS</div>
+            <div class="dropdown-option" data-value="Outro">Outro</div>
+          </div>
+        </div>
+
+        <%= form.text_field :numero_documento, placeholder: "Número do documento", value: @aluno.numero_documento %>
+        <%= form.date_field :data_expedicao, placeholder: "Data de expedição", value: @aluno.data_expedicao %>
+      </div>
+      <div class="form-linha">
+        <%= form.text_field :orgao_emissor, placeholder: "Órgão emissor", value: @aluno.orgao_emissor %>
+        <%= form.text_field :uf_emissao, placeholder: "UF de emissão", value: @aluno.uf_emissao %>
+      </div>
+      <div class="form-linha">
+        <%= form.text_field :nome_pai, placeholder: "Nome do pai", value: @aluno.nome_pai %>
+        <%= form.text_field :nome_mae, placeholder: "Nome da mãe", value: @aluno.nome_mae %>
+      </div>
+    </div>
+
+    <div class="perfil-grupo">
+      <h3>Informações acadêmicas</h3>
+      <div class="form-linha">
+        <%= form.text_field :curso, placeholder: "Curso", value: @aluno.curso, readonly: true %>
+        <%= form.text_field :periodo, placeholder: "Período", value: @aluno.periodo, readonly: true  %>
+        <%= form.text_field :turno, placeholder: "Turno", value: @aluno.turno, readonly: true  %>
+      </div>
+    </div>
+
+    <div class="perfil-grupo">
+      <h3>Informações de contato</h3>
+      <div class="form-linha">
+        <%= form.text_field :ddd, placeholder: "DDD", value: @aluno.ddd, maxlength: 2 %>
+        <%= form.text_field :celular, placeholder: "Celular", value: @aluno.celular %>
+        <%= form.email_field :email, placeholder: "E-mail", value: @aluno.email, readonly: true %>
+      </div>
+    </div>
+
+    <div class="perfil-grupo">
+      <h3>Informações de endereço</h3>
+      <div class="form-linha">
+        <%= form.text_field :cep, placeholder: "CEP", value: @aluno.cep, maxlength: 8 %>
+        <%= form.text_field :logradouro, placeholder: "Logradouro", value: @aluno.logradouro %>
+        <%= form.text_field :numero, placeholder: "Número", value: @aluno.numero %>
+      </div>
+      <div class="form-linha">
+        <%= form.text_field :bairro, placeholder: "Bairro", value: @aluno.bairro %>
+        <%= form.text_field :estado, placeholder: "Estado", value: @aluno.estado %>
+        <%= form.text_field :cidade, placeholder: "Cidade", value: @aluno.cidade %>
+      </div>
+    </div>
+
+    <div class="perfil-grupo">
+      <%= form.submit "Salvar Alterações", class: "btn-editar" %>
+    </div>
+  <% end %>
+</section>
+
+
+
+<script>
+function toggleDropdown(event) {
+  event.stopPropagation();
+  const options = document.getElementById('documentoOptions');
+  const isShowing = options.classList.contains('show');
+  
+  // Fecha todos os dropdowns abertos primeiro
+  document.querySelectorAll('.dropdown-options.show').forEach(dropdown => {
+    if (dropdown !== options) {
+      dropdown.classList.remove('show');
+    }
+  });
+  
+  // Abre/fecha o dropdown atual
+  options.classList.toggle('show');
+}
+
+// Fechar dropdown quando clicar fora
+document.addEventListener('click', function(event) {
+  const dropdowns = document.querySelectorAll('.dropdown-options');
+  const buttons = document.querySelectorAll('.dropdown-button');
+  
+  let isClickInsideDropdown = false;
+  
+  // Verifica se o clique foi em algum dropdown ou botão
+  dropdowns.forEach(dropdown => {
+    if (dropdown.contains(event.target)) {
+      isClickInsideDropdown = true;
+    }
+  });
+  
+  buttons.forEach(button => {
+    if (button.contains(event.target)) {
+      isClickInsideDropdown = true;
+    }
+  });
+  
+  // Se não foi em dropdown nem botão, fecha todos
+  if (!isClickInsideDropdown) {
+    dropdowns.forEach(dropdown => {
+      dropdown.classList.remove('show');
+    });
+  }
+});
+
+// Selecionar opção do dropdown
+document.querySelectorAll('.dropdown-option').forEach(option => {
+  option.addEventListener('click', function() {
+    const value = this.getAttribute('data-value');
+    const displayText = this.textContent;
+    
+    // Atualizar o campo hidden
+    document.getElementById('aluno_tipo_documento').value = value;
+    
+    // Atualizar o texto do botão
+    const selectedSpan = document.querySelector('.dropdown-selected');
+    selectedSpan.textContent = displayText;
+    
+    // Fechar o dropdown
+    document.getElementById('documentoOptions').classList.remove('show');
+  });
+});
+
+// Também fechar dropdown quando selecionar uma opção com Enter (acessibilidade)
+document.querySelectorAll('.dropdown-option').forEach(option => {
+  option.addEventListener('keypress', function(e) {
+    if (e.key === 'Enter') {
+      this.click();
+    }
+  });
+});
+</script>

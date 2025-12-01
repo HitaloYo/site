@@ -1,0 +1,127 @@
+<!-- app/views/pages/ajuda_login.html.erb -->
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <%= stylesheet_link_tag 'sessions' %>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
+    <title>Ajuda com Login - Instituto Qualquer</title>
+</head>
+<body>
+    <header>
+        <div id="titulo">
+            <h1>Instituição</h1>
+            <h1 id="t_2">Qualquer</h1>
+        </div>
+
+        <nav>
+            <ul>
+                <li><%= link_to 'Voltar ao Login', login_path %></li>
+                <li><%= link_to 'Contato', contato_path %></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <aside>
+            <div class="help-container">
+                <h2><i class="bi bi-question-circle"></i> Precisa de Ajuda com o Login?</h2>
+                <p class="help-subtitle">Siga os passos abaixo para resolver problemas de acesso</p>
+
+                <div class="help-steps">
+                    <div class="step-card">
+                        <div class="step-number">1</div>
+                        <div class="step-content">
+                            <h4><i class="bi bi-person-check"></i> Verifique seus Dados</h4>
+                            <p>Certifique-se de que está usando:</p>
+                            <ul>
+                                <li><strong>Matrícula:</strong> 8 dígitos (ex: 20250001)</li>
+                                <li><strong>Senha:</strong> A mesma cadastrada no primeiro acesso</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="step-card">
+                        <div class="step-number">2</div>
+                        <div class="step-content">
+                            <h4><i class="bi bi-key"></i> Esqueci minha Senha</h4>
+                            <p>Se você esqueceu a senha:</p>
+                            <ol>
+                                <li>Entre em contato com a secretaria acadêmica</li>
+                                <li>Apresente documento com foto</li>
+                                <li>Solicite a redefinição de senha</li>
+                            </ol>
+                            <div class="contact-info">
+                                <i class="bi bi-telephone"></i> (11) 3456-7890
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="step-card">
+                        <div class="step-number">3</div>
+                        <div class="step-content">
+                            <h4><i class="bi bi-lock"></i> Problemas Técnicos</h4>
+                            <p>Se o problema persistir:</p>
+                            <ul>
+                                <li>Verifique sua conexão com a internet</li>
+                                <li>Limpe o cache do navegador</li>
+                                <li>Tente usar outro navegador</li>
+                                <li>Desative extensões/bloqueadores</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="step-card">
+                        <div class="step-number">4</div>
+                        <div class="step-content">
+                            <h4><i class="bi bi-shield-check"></i> Acesso Bloqueado</h4>
+                            <p>Se sua conta foi bloqueada:</p>
+                            <ul>
+                                <li>Muitas tentativas de login incorretas</li>
+                                <li>Inatividade prolongada</li>
+                                <li>Problemas com matrícula</li>
+                            </ul>
+                            <p><strong>Solução:</strong> Contate o suporte técnico</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="emergency-contact">
+                    <h3><i class="bi bi-telephone-forward"></i> Atendimento Imediato</h3>
+                    <div class="contact-cards">
+                        <div class="contact-card">
+                            <i class="bi bi-headset"></i>
+                            <div>
+                                <strong>Suporte Técnico</strong>
+                                <p>suporte@institutoqualquer.edu.br</p>
+                                <p>(11) 3456-7890 - Ramal 2</p>
+                            </div>
+                        </div>
+                        <div class="contact-card">
+                            <i class="bi bi-mortarboard"></i>
+                            <div>
+                                <strong>Secretaria Acadêmica</strong>
+                                <p>secretaria@institutoqualquer.edu.br</p>
+                                <p>(11) 3456-7890 - Ramal 1</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <%= link_to login_path, class: 'back-login-button' do %>
+                    <i class="bi bi-arrow-left"></i> Voltar para o Login
+                <% end %>
+            </div>
+        </aside>
+        
+        <article>
+            <%= image_tag 'logo.png', 
+                         alt: 'Ilustração de suporte técnico e ajuda' %>
+        </article>
+    </main>
+</body>
+</html>

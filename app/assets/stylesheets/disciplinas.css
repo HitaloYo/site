@@ -1,0 +1,169 @@
+body {
+  margin: 0;
+  font-family: "Poppins", sans-serif;
+  background-color: #fff;
+  color: rgb(34, 34, 34);
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+header {
+  background-color: rgb(34, 34, 34);
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px 50px;
+  border-bottom: 5px solid rgb(132, 14, 201);
+}
+
+header h1 {
+  font-size: 28px;
+  margin: 0;
+  letter-spacing: 1px;
+}
+
+.header-buttons {
+  display: flex;
+  gap: 15px;
+}
+
+.header-button {
+  background-color: rgb(132, 14, 201);
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: 0.3s;
+  font-size: 15px;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-family: "Poppins", sans-serif;
+}
+
+.header-button:hover {
+  background-color: #9b30ff;
+  text-decoration: none;
+  color: #fff;
+}
+
+.logo {
+  height: 65px;
+}
+
+main {
+  padding: 40px;
+}
+
+.disciplinas-section {
+  background-color: whitesmoke;
+  border: 2px solid rgb(132, 14, 201);
+  border-radius: 12px;
+  padding: 40px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+}
+
+.disciplinas-section h2 {
+  color: rgb(132, 14, 201);
+  font-size: 28px;
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+.descricao {
+  text-align: center;
+  color: #555;
+  margin-bottom: 40px;
+  font-size: 16px;
+}
+
+.disciplinas-grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 25px;
+}
+
+.disciplina-card {
+  background-color: #fff;
+  border: 2px solid rgb(132, 14, 201);
+  border-radius: 12px;
+  width: 260px;
+  padding: 25px;
+  text-align: center;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.disciplina-card:hover {
+  background-color: whitesmoke;
+  transform: scale(1.05);
+  box-shadow: 0 6px 12px rgba(132, 14, 201, 0.3);
+}
+
+.disciplina-card i {
+  font-size: 42px;
+  color: rgb(132, 14, 201);
+  margin-bottom: 10px;
+}
+
+.disciplina-card h3 {
+  color: rgb(132, 14, 201);
+  margin-bottom: 8px;
+  font-size: 18px;
+}
+
+.disciplina-card p {
+  font-size: 15px;
+  margin: 4px 0;
+  color: rgb(34, 34, 34);
+}
+
+.disciplina-button {
+  background-color: rgb(132, 14, 201);
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  padding: 8px 16px;
+  margin-top: 10px;
+  cursor: pointer;
+  transition: 0.3s;
+  text-decoration: none;
+  display: inline-block;
+  font-family: "Poppins", sans-serif;
+}
+
+.disciplina-button:hover {
+  background-color: #9b30ff;
+  text-decoration: none;
+  color: #fff;
+}
+
+@media (max-width: 768px) {
+  header {
+    flex-direction: column;
+    text-align: center;
+    gap: 10px;
+  }
+
+  .header-buttons {
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .disciplinas-grid {
+    flex-direction: column;
+    align-items: center;
+  }
+}
+
+.no-disciplinas {
+  text-align: center;
+  padding: 40px;
+  color: #666;
+  font-style: italic;
+}

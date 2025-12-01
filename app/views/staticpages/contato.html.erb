@@ -1,0 +1,170 @@
+<!-- app/views/pages/contato.html.erb -->
+<header>
+  <h1>Instituto Qualquer</h1>
+  <div class="header-buttons">
+    <%= link_to root_path, class: 'header-button' do %>
+      <i class="bi bi-house-door"></i> Página Principal
+    <% end %>
+
+    <%= link_to disciplinas_path, class: 'header-button' do %>
+      <i class="bi bi-file-earmark-text"></i> Disciplinas
+    <% end %>
+
+    <%= link_to perfil_path, class: 'header-button' do %>
+      <i class="bi bi-person-circle"></i> Perfil
+    <% end %>
+    
+    <%= link_to logout_path, method: :delete, class: 'header-button' do %>
+      <i class="bi bi-box-arrow-right"></i> Sair
+    <% end %>
+  </div>
+  <%= image_tag 'logo.png', alt: 'Logo do Instituto', class: 'logo' %>
+</header>
+
+<main>
+  <section class="welcome">
+    <div class="welcome-text">
+      <h2><i class="bi bi-telephone"></i> Fale Conosco</h2>
+      <p>Estamos aqui para ajudar. Entre em contato conosco através dos canais abaixo.</p>
+    </div>
+    <%= image_tag 'logo.png', alt: 'Logo Instituto', class: 'logo-welcome' %>
+  </section>
+
+  <section class="content">
+    <div class="contact-container">
+      <div class="contact-grid">
+        <!-- Informações de Contato -->
+        <div class="contact-info">
+          <h3><i class="bi bi-info-circle"></i> Informações de Contato</h3>
+          
+          <div class="contact-item">
+            <div class="contact-icon">
+              <i class="bi bi-telephone-fill"></i>
+            </div>
+            <div class="contact-details">
+              <strong>Telefone</strong>
+              <p>(11) 3456-7890</p>
+              <small>Segunda a Sexta, 8h às 18h</small>
+            </div>
+          </div>
+
+          <div class="contact-item">
+            <div class="contact-icon">
+              <i class="bi bi-whatsapp"></i>
+            </div>
+            <div class="contact-details">
+              <strong>WhatsApp</strong>
+              <p>(11) 98765-4321</p>
+              <small>Atendimento rápido</small>
+            </div>
+          </div>
+
+          <div class="contact-item">
+            <div class="contact-icon">
+              <i class="bi bi-envelope-fill"></i>
+            </div>
+            <div class="contact-details">
+              <strong>E-mail</strong>
+              <p>contato@institutoqualquer.edu.br</p>
+              <small>Respondemos em até 24h</small>
+            </div>
+          </div>
+
+          <div class="contact-item">
+            <div class="contact-icon">
+              <i class="bi bi-geo-alt-fill"></i>
+            </div>
+            <div class="contact-details">
+              <strong>Endereço</strong>
+              <p>Rua Exemplo, 123 - Centro</p>
+              <p>São Paulo - SP, 01234-567</p>
+            </div>
+          </div>
+
+          <div class="contact-item">
+            <div class="contact-icon">
+              <i class="bi bi-clock-fill"></i>
+            </div>
+            <div class="contact-details">
+              <strong>Horário de Atendimento</strong>
+              <p>Segunda a Sexta: 8h às 18h</p>
+              <p>Sábado: 8h às 12h</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Formulário de Contato -->
+        <div class="contact-form">
+          <h3><i class="bi bi-send"></i> Envie uma Mensagem</h3>
+          <%= form_with url: "#", local: true, class: "message-form" do |form| %>
+            <div class="form-group">
+              <%= form.label :nome, "Seu Nome" %>
+              <%= form.text_field :nome, required: true, placeholder: "Digite seu nome completo" %>
+            </div>
+
+            <div class="form-group">
+              <%= form.label :email, "Seu E-mail" %>
+              <%= form.email_field :email, required: true, placeholder: "seu@email.com" %>
+            </div>
+
+            <div class="form-group">
+              <%= form.label :matricula, "Matrícula" %>
+              <%= form.text_field :matricula, placeholder: "Sua matrícula (opcional)" %>
+            </div>
+
+            <div class="form-group">
+              <%= form.label :assunto, "Assunto" %>
+              <%= form.select :assunto, [
+                ['Dúvida Acadêmica', 'academico'],
+                ['Problema Técnico', 'tecnico'],
+                ['Financeiro', 'financeiro'],
+                ['Outro', 'outro']
+              ], { prompt: 'Selecione o assunto' }, required: true %>
+            </div>
+
+            <div class="form-group">
+              <%= form.label :mensagem, "Mensagem" %>
+              <%= form.text_area :mensagem, rows: 5, required: true, placeholder: "Descreva sua dúvida ou solicitação..." %>
+            </div>
+
+            <%= form.submit "Enviar Mensagem", class: "submit-button" %>
+          <% end %>
+        </div>
+      </div>
+
+      <!-- Setores de Atendimento -->
+      <div class="departments-section">
+        <h3><i class="bi bi-building"></i> Setores de Atendimento</h3>
+        <div class="departments-grid">
+          <div class="department-card">
+            <i class="bi bi-mortarboard"></i>
+            <h4>Secretaria Acadêmica</h4>
+            <p>Matrículas, histórico, trancamento</p>
+            <span>secretaria@institutoqualquer.edu.br</span>
+          </div>
+
+          <div class="department-card">
+            <i class="bi bi-cash-coin"></i>
+            <h4>Financeiro</h4>
+            <p>Mensalidades, bolsas, pagamentos</p>
+            <span>financeiro@institutoqualquer.edu.br</span>
+          </div>
+
+          <div class="department-card">
+            <i class="bi bi-laptop"></i>
+            <h4>Suporte Técnico</h4>
+            <p>Problemas com acesso, sistema</p>
+            <span>suporte@institutoqualquer.edu.br</span>
+          </div>
+
+          <div class="department-card">
+            <i class="bi bi-book"></i>
+            <h4>Biblioteca</h4>
+            <p>Empréstimos, acervo, pesquisas</p>
+            <span>biblioteca@institutoqualquer.edu.br</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>

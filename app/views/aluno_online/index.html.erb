@@ -1,0 +1,118 @@
+<!-- app/views/aluno_online/index.html.erb -->
+<section class="welcome aluno-online-welcome">
+  <div class="welcome-text">
+    <h2><i class="bi bi-laptop"></i> Aluno Online</h2>
+    <p>Consulte suas informações acadêmicas, notas e situação curricular.</p>
+  </div>
+  <%= image_tag "logo.png", alt: "Logo Instituto", class: "logo-welcome" %>
+</section>
+
+<section class="content aluno-online-content">
+  <!-- Informações Acadêmicas -->
+  <div class="info-card">
+    <h3><i class="bi bi-person-badge"></i> Informações Acadêmicas</h3>
+    <div class="info-grid">
+      <div class="info-item">
+        <strong>Nome:</strong>
+        <span><%= @aluno.nome %></span>
+      </div>
+      <div class="info-item">
+        <strong>Matrícula:</strong>
+        <span><%= @aluno.matricula %></span>
+      </div>
+      <div class="info-item">
+        <strong>Curso:</strong>
+        <span><%= @aluno.curso || 'Não informado' %></span>
+      </div>
+      <div class="info-item">
+        <strong>Período:</strong>
+        <span><%= @aluno.periodo || 'Não informado' %></span>
+      </div>
+      <div class="info-item">
+        <strong>Turno:</strong>
+        <span><%= @aluno.turno || 'Não informado' %></span>
+      </div>
+      <div class="info-item">
+        <strong>Situação:</strong>
+        <span class="status status-<%= @aluno.ativo ? 'regular' : 'inativo' %>">
+          <%= @aluno.ativo ? 'Regular' : 'Inativo' %>
+        </span>
+      </div>
+      <div class="info-item">
+        <strong>IRA:</strong>
+        <span><%= @ira %></span>
+      </div>
+      <div class="info-item">
+        <strong>Créditos Concluídos:</strong>
+        <span><%= @creditos_concluidos %></span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Notas por Disciplina -->
+  <div class="notas-card">
+    <h3><i class="bi bi-journal-text"></i> Notas do Semestre</h3>
+    <div class="table-container">
+      <table class="notas-table">
+        <thead>
+          <tr>
+            <th>Disciplina</th>
+            <th>Professor</th>
+            <th>Nota 1</th>
+            <th>Nota 2</th>
+            <th>Nota 3</th>
+            <th>Média</th>
+            <th>Situação</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% if @matriculas.any? %>
+            <% @matriculas.each do |matricula| %>
+              <tr>
+                <td><%= matricula.turma.disciplina.nome %></td>
+                <td>Prof. <%= matricula.turma.disciplina.professor.nome %></td>
+                <td>--</td>
+                <td>--</td>
+                <td>--</td>
+                <td><%= matricula.nota_final || '--' %></td>
+                <td>
+                  <span class="status status-<%= matricula.situacao.downcase %>">
+                    <%= matricula.situacao %>
+                  </span>
+                </td>
+              </tr>
+            <% end %>
+          <% else %>
+            <tr>
+              <td colspan="7" class="text-center">Nenhuma disciplina matriculada no momento</td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- Disciplinas Matriculadas -->
+  <div class="disciplinas-card">
+    <h3><i class="bi bi-book"></i> Disciplinas Matriculadas</h3>
+    <div class="disciplinas-grid">
+      <% if @matriculas.any? %>
+        <% @matriculas.each do |matricula| %>
+          <div class="disciplina-item">
+            <h4><%= matricula.turma.disciplina.nome %></h4>
+            <p><strong>Código:</strong> <%= matricula.turma.disciplina.codigo %></p>
+            <p><strong>Créditos:</strong> 4</p>
+            <p><strong>Horário:</strong> A definir</p>
+            <p><strong>Professor:</strong> <%= matricula.turma.disciplina.professor.nome %></p>
+            <p><strong>Turma:</strong> <%= matricula.turma.codigo_turma %></p>
+          </div>
+        <% end %>
+      <% else %>
+        <div class="no-disciplinas">
+          <i class="bi bi-book-x" style="font-size: 48px; color: #6c757d;"></i>
+          <p>Nenhuma disciplina matriculada no momento.</p>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</section>

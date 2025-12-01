@@ -1,0 +1,2 @@
+class AddProfileFieldsToAluno < ApplicationRecord
+end

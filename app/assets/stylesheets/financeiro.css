@@ -1,0 +1,131 @@
+body {
+  margin: 0;
+  font-family: "Poppins", sans-serif;
+  background-color: #fff;
+  color: rgb(34,34,34);
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+header {
+  background-color: rgb(34, 34, 34);
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px 40px;
+  border-bottom: 5px solid rgb(132, 14, 201);
+}
+header h1 { font-size: 26px; margin: 0; }
+
+.header-buttons { display: flex; gap: 12px; }
+.header-button {
+  background-color: rgb(132, 14, 201);
+  color: #fff;
+  border: none;
+  padding: 8px 14px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: 0.3s;
+  font-size: 14px;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-family: "Poppins", sans-serif;
+}
+.header-button:hover { 
+  background-color: #9b30ff; 
+  text-decoration: none;
+  color: #fff;
+}
+
+.logo { height: 60px; }
+
+main { padding: 30px; flex: 1; }
+
+.welcome.financeiro-welcome {
+  background: linear-gradient(135deg, rgb(132, 14, 201), rgb(34, 34, 34));
+  color: #fff;
+  border-radius: 12px;
+  padding: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+.logo-welcome { height: 90px; filter: drop-shadow(2px 2px 6px rgba(0,0,0,0.4)); }
+
+.content.financeiro-content {
+  display: flex;
+  gap: 24px;
+  align-items: flex-start;
+  flex-wrap: wrap;
+}
+
+/* PERFIL CARD */
+.perfil-card {
+  background-color: #fff;
+  border: 2px solid rgb(132, 14, 201);
+  border-radius: 12px;
+  padding: 22px;
+  width: 420px;
+  box-shadow: 0 6px 12px rgba(0,0,0,0.06);
+}
+.perfil-card h3 { color: rgb(132,14,201); margin-top: 0; }
+.perfil-info p { margin: 8px 0; font-size: 14px; }
+
+.status {
+  font-weight: bold;
+  padding: 3px 8px;
+  border-radius: 6px;
+}
+.status-regular { background-color: #27ae60; color: white; }
+.status-pendente { background-color: #e67e22; color: white; }
+.status-inadimplente { background-color: #c0392b; color: white; }
+
+/* SOLICITAÇÃO CARD */
+.solicitacao-card {
+  background-color: #fff;
+  border: 2px solid rgb(132, 14, 201);
+  border-radius: 12px;
+  padding: 22px;
+  flex: 1;
+  box-shadow: 0 6px 12px rgba(0,0,0,0.06);
+}
+.solicitacao-card h3 { color: rgb(132,14,201); margin-top: 0; }
+.solicitacao-card p { font-size: 14px; }
+
+.solicitacao-card select,
+.solicitacao-card .form-select {
+  width: 100%;
+  padding: 10px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  margin-top: 6px;
+  margin-bottom: 14px;
+  font-size: 14px;
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
+}
+
+.form-actions { margin-top: 8px; }
+.primary {
+  background-color: rgb(132, 14, 201);
+  color: #fff;
+  border: none;
+  padding: 10px 16px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: 0.3s;
+  font-family: "Poppins", sans-serif;
+}
+.primary:hover { background-color: #9b30ff; }
+
+.hint { display: block; margin-top: 10px; color: #666; font-size: 12px; }
+
+@media (max-width: 900px) {
+  .content.financeiro-content { flex-direction: column; align-items: stretch; }
+  .perfil-card, .solicitacao-card { width: 100%; }
+}

@@ -1,0 +1,2 @@
+module AmbienteVirtualHelper
+end
