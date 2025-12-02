@@ -31,10 +31,10 @@
             <%= form_with url: login_path, local: true do |form| %>
                 <h2>Acesse o Portal Acadêmico</h2>
                 
-                <label for="matricula">E-mail ou Matrícula</label>
+                <label for="matricula">Matrícula</label>
                 <%= form.text_field :matricula, 
                                   id: "matricula",
-                                  placeholder: "Digite seu E-mail ou Matrícula", 
+                                  placeholder: "Digite sua Matrícula", 
                                   required: true %>
 
                 <label for="password">Senha</label>

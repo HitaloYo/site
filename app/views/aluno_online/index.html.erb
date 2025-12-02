@@ -57,11 +57,11 @@
         <thead>
           <tr>
             <th>Disciplina</th>
-            <th>Professor</th>
-            <th>Nota 1</th>
-            <th>Nota 2</th>
-            <th>Nota 3</th>
-            <th>Média</th>
+            <th>Turma</th>
+            <th>Avaliação 1</th>
+            <th>Avaliação 2</th>
+            <th>Projeto</th>
+            <th>Média Final</th>
             <th>Situação</th>
           </tr>
         </thead>
@@ -70,11 +70,29 @@
             <% @matriculas.each do |matricula| %>
               <tr>
                 <td><%= matricula.turma.disciplina.nome %></td>
-                <td>Prof. <%= matricula.turma.disciplina.professor.nome %></td>
-                <td>--</td>
-                <td>--</td>
-                <td>--</td>
-                <td><%= matricula.nota_final || '--' %></td>
+                <td><%= matricula.turma.codigo_turma %></td>
+                
+                <!-- Mostrar as 3 notas (Prova 1, Prova 2, Projeto) -->
+                <% 
+                  # Buscar as 3 avaliações da turma
+                  avaliacoes = matricula.turma.avaliacoes.order(:data_avaliacao)
+                  
+                  # Mapear cada avaliação para sua nota
+                  notas = avaliacoes.map do |avaliacao|
+                    matricula.notas.find_by(avaliacao_id: avaliacao.id)&.valor
+                  end
+                %>
+                
+                <% notas.each do |nota| %>
+                  <td><%= nota ? nota.round(2) : '--' %></td>
+                <% end %>
+                
+                <!-- Preencher células vazias se houver menos de 3 avaliações -->
+                <% (3 - notas.size).times do %>
+                  <td>--</td>
+                <% end %>
+                
+                <td><strong><%= matricula.nota_final ? matricula.nota_final.round(2) : '--' %></strong></td>
                 <td>
                   <span class="status status-<%= matricula.situacao.downcase %>">
                     <%= matricula.situacao %>
@@ -102,9 +120,16 @@
             <h4><%= matricula.turma.disciplina.nome %></h4>
             <p><strong>Código:</strong> <%= matricula.turma.disciplina.codigo %></p>
             <p><strong>Créditos:</strong> 4</p>
-            <p><strong>Horário:</strong> A definir</p>
             <p><strong>Professor:</strong> <%= matricula.turma.disciplina.professor.nome %></p>
             <p><strong>Turma:</strong> <%= matricula.turma.codigo_turma %></p>
+            <p><strong>Situação:</strong> 
+              <span class="status status-<%= matricula.situacao.downcase %>">
+                <%= matricula.situacao %>
+              </span>
+            </p>
+            <p><strong>Média Final:</strong> 
+              <%= matricula.nota_final ? matricula.nota_final.round(2) : '--' %>
+            </p>
           </div>
         <% end %>
       <% else %>
