@@ -5,16 +5,25 @@ default: &default
 
 development:
   <<: *default
-  database: PAA_development 
-  #username: root
-  #password: root
+  database: portal_academico_development
 
 test:
   <<: *default
-  database: PAA_test
+  database: portal_academico_test
 
 production:
-  <<: *default
-  database: <%= ENV['DB_NAME'] %>
-  url: <%= ENV['DATABASE_URL'] %>
-  # REMOVA a seção 'cable' se existir
+  primary: &primary_production
+    <<: *default
+    url: <%= ENV["DATABASE_URL"] %>
+  
+  # AQUI ESTÁ O TRUQUE:
+  # Apontamos o Cable (WebSockets), Cache e Queue (Fila) 
+  # para o mesmo banco de dados "primary" que configuramos acima.
+  cable:
+    <<: *primary_production
+  
+  queue:
+    <<: *primary_production
+  
+  cache:
+    <<: *primary_production
