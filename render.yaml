@@ -1,22 +1,19 @@
-databases:
-  - name: mysite_db
-    databaseName: mysite
-    user: mysite
-    plan: free
-
 services:
   - type: web
-    name: mysite_web
-    runtime: ruby
-    plan: free
+    name: portal-academico
+    env: ruby
     buildCommand: "./bin/render-build.sh"
-    startCommand: "./bin/rails server"
+    startCommand: "bundle exec puma -C config/puma.rb"
     envVars:
       - key: DATABASE_URL
         fromDatabase:
-          name: mysite_db
+          name: portal-academico-db
           property: connectionString
       - key: RAILS_MASTER_KEY
         sync: false
-      - key: WEB_CONCURRENCY
-        value: "2"
+      - key: RACK_ENV
+        value: production
+      - key: RAILS_ENV
+        value: production
+      - key: DB_NAME
+        value: portal_academico_production

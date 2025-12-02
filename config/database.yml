@@ -15,4 +15,6 @@ test:
 
 production:
   <<: *default
-  url: <%= ENV["DATABASE_URL"] %>
+  database: <%= ENV['DB_NAME'] %>
+  url: <%= ENV['DATABASE_URL'] %>
+  # REMOVA a seção 'cable' se existir
