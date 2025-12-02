@@ -3,7 +3,7 @@
 puts "🌱 Iniciando o seed..."
 
 # 1. Limpeza do Banco de Dados (Ordem inversa para respeitar Foreign Keys)
-puts "🗑️  Limpando dados existentes..."
+puts "🗑️  Limpando dados existentes (Notas, Matrículas, Turmas, Professores, Alunos)..."
 Nota.destroy_all
 Avaliacao.destroy_all
 Frequencia.destroy_all
@@ -13,125 +13,135 @@ Disciplina.destroy_all
 Aluno.destroy_all
 Professor.destroy_all
 
-# 2. Criando Professores
-puts "👨‍🏫 Criando Professores..."
-professores = []
-departamentos = ["Ciências Exatas", "Ciências Humanas", "Tecnologia"]
+# Configuração básica
+PASSWORD_DEFAULT = "senha123"
+DATA_NASCIMENTO_PADRAO = 25.years.ago.to_date
+DATA_CRIACAO_PADRAO = Time.now
 
-3.times do |i|
-  professores << Professor.create!(
-    matricula: "DOC#{202400 + i}",
-    nome: ["Carlos Sampaio", "Ana Beatriz", "Roberto Mendes"][i],
-    email: "docente#{i}@faculdade.edu.br",
-    departamento: departamentos[i],
-    ativo: true
-  )
-end
+# 2. Criando Professores
+puts "👨‍🏫 Criando Professores (3)..."
+professores = {}
+professores[:exatas] = Professor.create!(
+  matricula: "DOC1001", nome: "Dr. Marcos Álvares", email: "marcos@teste.com",
+  departamento: "Ciências Exatas"
+)
+professores[:humanas] = Professor.create!(
+  matricula: "DOC1002", nome: "Dra. Eliana Costa", email: "eliana@teste.com",
+  departamento: "Ciências Humanas"
+)
+professores[:saude] = Professor.create!(
+  matricula: "DOC1003", nome: "Dr. Gustavo Lima", email: "gustavo@teste.com",
+  departamento: "Saúde e Biológicas"
+)
+professores[:direito] = Professor.create!(
+  matricula: "DOC1004", nome: "Dra. Renata Fontes", email: "renata@teste.com",
+  departamento: "Ciências Jurídicas"
+)
 
 # 3. Criando Disciplinas e Turmas
 puts "📚 Criando Disciplinas, Turmas e Avaliações..."
-disciplinas_data = [
-  { nome: "Algoritmos e Lógica", codigo: "ALG101", carga: 60, prof: professores[2] },
-  { nome: "Cálculo Diferencial", codigo: "CAL101", carga: 80, prof: professores[0] },
-  { nome: "Sociologia", codigo: "SOC101", carga: 40, prof: professores[1] },
-  { nome: "Banco de Dados", codigo: "BD101", carga: 60, prof: professores[2] }
+
+# --- Cursos ---
+CURSOS = [
+  "Ciências da Computação",
+  "Enfermagem",
+  "Direito",
+  "Engenharia Civil",
+  "Pedagogia"
 ]
+turmas_por_curso = {}
 
-turmas = []
+# --- CC ---
+disc_cc_1 = Disciplina.create!(professor: professores[:exatas], codigo: "ALG101", nome: "Algoritmos e Estrutura de Dados", carga_horaria: 60)
+turma_cc_1 = Turma.create!(disciplina: disc_cc_1, codigo_turma: "CC101-T01", semestre: 1, ano: 2024, vagas_totais: 30)
+turmas_por_curso["Ciências da Computação"] = [turma_cc_1]
 
-disciplinas_data.each_with_index do |d, index|
-  disc = Disciplina.create!(
-    nome: d[:nome],
-    codigo: d[:codigo],
-    carga_horaria: d[:carga],
-    professor: d[:prof]
-  )
+# --- Enfermagem ---
+disc_enf_1 = Disciplina.create!(professor: professores[:saude], codigo: "ANAT101", nome: "Anatomia Humana", carga_horaria: 80)
+turma_enf_1 = Turma.create!(disciplina: disc_enf_1, codigo_turma: "ENF101-T02", semestre: 1, ano: 2024, vagas_totais: 25)
+turmas_por_curso["Enfermagem"] = [turma_enf_1]
 
-  # Cria uma turma para a disciplina
-  turma = Turma.create!(
-    disciplina: disc,
-    codigo_turma: "T#{100 + index}",
-    semestre: 1,
-    ano: 2024,
-    vagas_totais: 40,
-    vagas_ocupadas: 0
-  )
-  turmas << turma
+# --- Direito ---
+disc_dir_1 = Disciplina.create!(professor: professores[:direito], codigo: "CONST101", nome: "Direito Constitucional", carga_horaria: 60)
+turma_dir_1 = Turma.create!(disciplina: disc_dir_1, codigo_turma: "DIR101-T03", semestre: 1, ano: 2024, vagas_totais: 40)
+turmas_por_curso["Direito"] = [turma_dir_1]
 
-  # Cria avaliações para a turma (Total peso 10)
-  Avaliacao.create!(turma: turma, tipo: "Prova 1", descricao: "Conteúdo inicial", peso: 3.0, data_avaliacao: Date.today - 3.months)
-  Avaliacao.create!(turma: turma, tipo: "Prova 2", descricao: "Conteúdo intermediário", peso: 3.0, data_avaliacao: Date.today - 2.months)
-  Avaliacao.create!(turma: turma, tipo: "Projeto Final", descricao: "Aplicação prática", peso: 4.0, data_avaliacao: Date.today - 1.month)
+# --- Engenharia Civil ---
+disc_eng_1 = Disciplina.create!(professor: professores[:exatas], codigo: "CALC101", nome: "Cálculo Diferencial I", carga_horaria: 80)
+turma_eng_1 = Turma.create!(disciplina: disc_eng_1, codigo_turma: "ENG101-T04", semestre: 1, ano: 2024, vagas_totais: 35)
+turmas_por_curso["Engenharia Civil"] = [turma_eng_1]
+
+# --- Pedagogia ---
+disc_ped_1 = Disciplina.create!(professor: professores[:humanas], codigo: "PED101", nome: "Psicologia da Educação", carga_horaria: 40)
+turma_ped_1 = Turma.create!(disciplina: disc_ped_1, codigo_turma: "PED101-T05", semestre: 1, ano: 2024, vagas_totais: 50)
+turmas_por_curso["Pedagogia"] = [turma_ped_1]
+
+# --- Avaliações Padrão (para todas as Turmas) ---
+turmas_por_curso.values.flatten.each do |turma|
+  Avaliacao.create!(turma: turma, tipo: "Prova 1", descricao: "Primeira Prova", peso: 40.0, data_avaliacao: 2.weeks.from_now)
+  Avaliacao.create!(turma: turma, tipo: "Trabalho", descricao: "Trabalho Final", peso: 20.0, data_avaliacao: 4.weeks.from_now)
+  Avaliacao.create!(turma: turma, tipo: "Prova Final", descricao: "Avaliação Final", peso: 40.0, data_avaliacao: 6.weeks.from_now)
 end
 
-# ... (código anterior dos professores e turmas continua igual) ...
 
-# 4. Criando Alunos com Perfil Completo
-puts "🎓 Criando 10 Alunos e lançando notas..."
+# 4. Criando 10 Alunos Separadamente
+puts "🎓 Criando 10 Alunos..."
+aluno_data = [
+  { nome: "Hitalo Yo (CC)", curso: "Ciências da Computação" },
+  { nome: "Mariana Silva (CC)", curso: "Ciências da Computação" },
+  { nome: "Juliana Santos (Enf)", curso: "Enfermagem" },
+  { nome: "Pedro Rocha (Enf)", curso: "Enfermagem" },
+  { nome: "Lívia Almeida (Dir)", curso: "Direito" },
+  { nome: "Felipe Costa (Dir)", curso: "Direito" },
+  { nome: "Gabriel Neves (Eng)", curso: "Engenharia Civil" },
+  { nome: "Isabela Gomes (Eng)", curso: "Engenharia Civil" },
+  { nome: "Tatiane Souza (Ped)", curso: "Pedagogia" },
+  { nome: "Ricardo Pires (Ped)", curso: "Pedagogia" },
+]
 
-10.times do |i|
+alunos = []
+aluno_data.each_with_index do |data, i|
+  matricula_num = 20240001 + i
+  email_prefix = data[:nome].split.first.downcase.gsub(/[^a-z]/, '')
+  curso_abbr = data[:curso].split.map{|w| w[0]}.join.downcase
+
   aluno = Aluno.create!(
-    # Dados Básicos
-    matricula: "2024#{1000 + i}",
-    nome: "Estudante #{i + 1} da Silva",
-    email: "aluno#{i + 1}@email.com",
-    password: "senha123",
-    cpf: "123456789#{i.to_s.rjust(2, '0')}", # SEM PONTOS OU TRAÇOS
-    data_nascimento: Date.new(1995 + i, 5, 20),
-    data_criacao: DateTime.now,
+    matricula: matricula_num.to_s,
+    nome: data[:nome],
+    email: "#{email_prefix}.#{matricula_num}@#{curso_abbr}.edu.br",
+    password: PASSWORD_DEFAULT,
+    cpf: "00#{i}#{i}0000#{i}", # CPF único simples
+    data_nascimento: DATA_NASCIMENTO_PADRAO,
+    data_criacao: DATA_CRIACAO_PADRAO,
     ativo: true,
-
-    # Perfil
-    cor_raca: ["Branca", "Parda", "Preta", "Amarela"].sample,
-    estado_civil: ["Solteiro(a)", "Casado(a)"].sample,
-    sexo: ["Masculino", "Feminino"].sample,
-    estado_nascimento: "SP",
-    cidade_nascimento: "São Paulo",
-    tipo_documento: "RG",
-    numero_documento: "4455566#{i}X", # SEM PONTOS
-    data_expedicao: Date.today - 5.years,
-    orgao_emissor: "SSP",
-    uf_emissao: "SP",
-    nome_pai: "Pai do Aluno #{i}",
-    nome_mae: "Mãe do Aluno #{i}",
-    
-    # Contato e Endereço
-    ddd: "11",
-    # CORREÇÃO AQUI: 11 dígitos e apenas números (ex: 11988880001)
-    celular: "1198888#{i.to_s.rjust(4, '0')}", 
-    
-    # CORREÇÃO AQUI: 8 dígitos e apenas números
-    cep: "01001000", 
-    
-    logradouro: "Av. Paulista",
-    numero: "#{100 + i}",
-    bairro: "Bela Vista",
-    cidade: "São Paulo",
-    estado: "SP",
-    periodo: ["Matutino", "Noturno"].sample,
-    turno: "Presencial",
-    unidade: "Campus Central"
+    curso: data[:curso] # Novo campo 'curso'
   )
+  alunos << aluno
+end
 
-  # ... (o restante do código das matrículas continua igual) ...
-  # 5. Matricular Aluno, Lançar Notas e Calcular Média
-  soma_notas_finais = 0
-  
-  turmas.each do |turma|
+# 5. Matricular Alunos, Lançar Notas e Calcular Média
+puts "📝 Matricular Alunos e Lançar Notas..."
+
+alunos.each do |aluno|
+  turmas_do_curso = turmas_por_curso[aluno.curso] || []
+
+  turmas_do_curso.each do |turma|
     # Cria Matrícula
     matricula = Matricula.create!(
       aluno: aluno,
       turma: turma,
-      situacao: "Cursando", # Será atualizado abaixo
-      frequencia: rand(70..100) # Frequência aleatória entre 70% e 100%
+      situacao: "Cursando",
+      # Frequência (usado na sua migração)
+      frequencia: rand(70..100)
     )
 
-    media_do_aluno_na_turma = 0
+    media_ponderada = 0.0
+    peso_total = 0.0
 
     # Lança notas para cada avaliação da turma
     turma.avaliacoes.each do |avaliacao|
-      # Gera uma nota aleatória entre 4.0 e 10.0 para não ter muitos reprovados
-      nota_tirada = (rand(40..100) / 10.0) 
+      # Gera uma nota aleatória (maior chance de aprovação)
+      nota_tirada = (rand(40..100) / 10.0)
       
       Nota.create!(
         matricula: matricula,
@@ -139,25 +149,22 @@ puts "🎓 Criando 10 Alunos e lançando notas..."
         valor: nota_tirada
       )
 
-      # Acumula para a média (Nota * Peso / 10)
-      media_do_aluno_na_turma += (nota_tirada * avaliacao.peso) / 10.0
+      media_ponderada += (nota_tirada * avaliacao.peso)
+      peso_total += avaliacao.peso
     end
 
     # Define situação final
-    situacao_final = media_do_aluno_na_turma >= 6.0 ? "Aprovado" : "Reprovado"
+    media_final = peso_total > 0.0 ? (media_ponderada / peso_total) : 0.0
+    situacao_final = media_final >= 6.0 ? "Aprovado" : "Reprovado"
     
-    # Atualiza a matrícula com a nota final e situação
-    matricula.update!(
-      nota_final: media_do_aluno_na_turma.round(2),
-      situacao: situacao_final
-    )
+    # Atualiza a situação final da matrícula
+    matricula.update!(situacao: situacao_final)
     
-    soma_notas_finais += media_do_aluno_na_turma
+    puts " - ✅ #{aluno.nome} matriculado em #{turma.disciplina.nome}. Situação: #{situacao_final} (Média: #{'%.2f' % media_final})"
   end
-
-  # Cálculo do IRA (Média das médias)
-  ira = soma_notas_finais / turmas.count
-  puts "   -> Aluno: #{aluno.nome} | IRA: #{ira.round(2)}"
 end
 
-puts "✅ Seed finalizado com sucesso! Usuário padrão: matricula '20241000' / senha 'senha123'"
+puts "---------------------------------------------------------"
+puts "✅ Seed finalizado! 10 alunos criados e matriculados."
+puts "Login de Teste (CC): Matrícula 20240001 / Senha: #{PASSWORD_DEFAULT}"
+puts "---------------------------------------------------------"
